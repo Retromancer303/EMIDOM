@@ -1,0 +1,549 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.indexWrapper {
+    height: 100vh;
+}
+
+.indexPage {
+    align-content: center;
+    background-color: #1c1c1c;
+    color: white;
+}
+
+/*HEADER AND FOOTER*/
+nav {
+    position: relative;
+    top: 0;
+    background-color: #343A40;
+    height: 100px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 0 25px 0 black;
+    justify-content: space-between;
+    padding-top: 8px;
+    z-index: 1000;
+}
+
+nav ul {
+    display: flex;
+    list-style-type: none;
+}
+
+nav li {
+    margin: 0 20px;
+}
+
+nav li a {
+    text-decoration: none;
+    color: #ffffff;
+    line-height: 80px;
+}
+
+nav li img {
+    width: 30px;
+}
+
+nav li .logo {
+    width: 80px;
+}
+
+nav ul.feature-item {
+    margin-left: auto;
+}
+
+.feature-home {
+    font-size: 30px;
+    font-weight: bold;
+    padding: 0 2rem;
+}
+
+footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 40px;
+    background-color: #343A40;
+    text-align: center;
+    color: white;
+}
+
+footer p {
+    background-color: #343A40;
+    text-align: center;
+}
+
+footer a {
+    color: #b769c5;
+    text-decoration: none;
+}
+
+footer a:hover {
+    color: #71378e;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/*---------SEARCH BAR-------------*/
+.fa{
+    box-sizing: border-box;
+    padding: 10px;
+    width: 42.5px;
+    height: 42.5px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    border-radius: 50%;
+    color: #8c52ff;
+    text-align: center;
+    font-size: 1.2em;
+    transition: all 1s;
+    cursor: pointer;
+}
+
+.animeLogo-Container {
+    width: auto;
+    height: 20%;
+    display: block;
+    float: left;
+    margin: 10px;
+}
+
+#anime-recomend-Container {
+    display: flex;
+    justify-content: center;
+    /* Horizontally center the images */
+    align-items: center;
+    /* Vertically center the images */
+    margin-left: 20px;
+    margin-right: 20px;
+    position: relative;
+    bottom: 0;
+    left: auto;
+}
+
+#anime-recomend-Container img {
+    max-width: 300px;
+    max-height: 300px;
+    padding: 20px;
+}
+
+/*DISPLAYING INDEX*/
+
+/* Common styles for both containers */
+.container {
+    max-width: 1300px;
+    margin-top: 80px;
+    width: 84%;
+}
+
+/* Common styles for both slider wrappers */
+.slider-wrapper,
+.manga-slider-wrapper,
+.tvNew-slider-wrapper{
+    position: relative;
+}
+
+/* Common styles for both slide buttons */
+.slider-wrapper .slide-button,
+.manga-slider-wrapper .manga-slide-button, 
+.tvNew-slider-wrapper .tvNew-slide-button{
+    position: absolute;
+    top: 50%;
+    outline: none;
+    border: none;
+    height: 50px;
+    width: 50px;
+    z-index: 5;
+    color: #71378e;
+    display: flex;
+    cursor: pointer;
+    font-size: 2.2rem;
+    background: #ffffff;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transform: translateY(-50%);
+}
+
+/* Common styles for both slide buttons on hover */
+.slider-wrapper .slide-button:hover,
+.manga-slider-wrapper .manga-slide-button:hover,
+.tvNew-slider-wrapper .tvNew-slide-button:hover{
+    background: #404040;
+}
+
+/* Styles for previous slide button */
+.slider-wrapper .slide-button#prev-slide,
+.manga-slider-wrapper .manga-slide-button#manga-prev-slide,
+.tvNew-slider-wrapper .tvNew-slide-button#tvNew-prev-slide{
+    left: -33px;
+    display: none;
+}
+
+/* Styles for next slide button */
+.slider-wrapper .slide-button#next-slide,
+.manga-slider-wrapper .manga-slide-button#manga-next-slide,
+.tvNew-slider-wrapper .tvNew-slide-button#tvNew-next-slide{
+    right: -33px;
+}
+
+/* Common styles for both image lists */
+.slider-wrapper .image-list,
+.manga-slider-wrapper .manga-image-list,
+.tvNew-slider-wrapper .tvNew-image-list{
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 18px;
+    font-size: 0;
+    list-style: none;
+    margin-bottom: 30px;
+    overflow-x: auto;
+    scrollbar-width: none;
+}
+
+/* Hide scrollbar for both image lists */
+.slider-wrapper .image-list::-webkit-scrollbar,
+.manga-slider-wrapper .manga-image-list::-webkit-scrollbar,
+.tvNew-slider-wrapper .tvNew-image-list::-webkit-scrollbar{
+    display: none;
+}
+
+/* Common styles for both image items */
+.slider-wrapper .image-list .image-item,
+.manga-slider-wrapper .manga-image-list .manga-image-item,
+.tvNew-slider-wrapper .tvNew-image-list .tvNew-image-item{
+    width: 200px;
+    height: 300px;
+    object-fit: cover;
+}
+
+/* Common styles for both slider scrollbars */
+.container .slider-scrollbar,
+.manga-slider-scrollbar,
+.tvNew-slider-scrollbar{
+    height: 24px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    position: relative; /* Add this line */
+    z-index: 1;
+}
+
+/* Common styles for both scrollbar tracks */
+.slider-scrollbar .scrollbar-track,
+.manga-slider-scrollbar .manga-scrollbar-track,
+.tvNew-slider-scrollbar .tvNew-scrollbar-track{
+    background: #ffffff;
+    width: 100%;
+    height: 2px;
+    display: flex;
+    align-items: center;
+    border-radius: 4px;
+    position: relative;
+    z-index: 1;
+}
+
+/* Hover styles for both scrollbar tracks */
+.slider-scrollbar:hover .scrollbar-track,
+.manga-slider-scrollbar:hover .manga-scrollbar-track,
+.tvNew-slider-scrollbar:hover .tvNew-scrollbar-track{
+    height: 4px;
+}
+
+/* Common styles for both scrollbar thumbs */
+.slider-scrollbar .scrollbar-thumb,
+.manga-slider-scrollbar .manga-scrollbar-thumb,
+.tvNew-slider-scrollbar .tvNew-scrollbar-thumb{
+    position: absolute;
+    background: #71378e;
+    top: 0;
+    bottom: 0;
+    width: 50%;
+    height: 100%;
+    cursor: grab;
+    border-radius: inherit;
+    z-index: 1;
+}
+
+/* Active styles for both scrollbar thumbs */
+.slider-scrollbar .scrollbar-thumb:active,
+.manga-slider-scrollbar .manga-scrollbar-thumb:active,
+.tvNew-slider-scrollbar .tvNew-scrollbar-thumb:active{
+    cursor: grabbing;
+    height: 8px;
+    top: -2px;
+}
+
+/* Pseudo-element styles for both scrollbar thumbs */
+.slider-scrollbar .scrollbar-thumb::after,
+.manga-slider-scrollbar .manga-scrollbar-thumb::after,
+.tvNew-slider-scrollbar .tvNew-scrollbar-thumb::after{
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: -10px;
+    bottom: -10px;
+}
+
+/*DISPLAYING RUNNING ANIME*/
+
+
+/*---------SEARCH BAR-------------*/
+.fa{
+    box-sizing: border-box;
+    padding: 10px;
+    width: 42.5px;
+    height: 42.5px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    border-radius: 50%;
+    color: #8c52ff;
+    text-align: center;
+    font-size: 1.2em;
+    transition: all 1s;
+    cursor: pointer;
+}
+
+.search-container:hover form {
+    width: 300px;
+}
+
+.searchpage-container:hover form {
+    width: 300px;
+}
+
+
+form:hover input {
+    display: block;
+}
+
+form:hover .fa {
+    background: #8c52ff;
+    color: white;
+}
+
+form {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: all 1s;
+    width: 50px;
+    height: 50px;
+    background: white;
+    box-sizing: border-box;
+    border-radius: 25px;
+    border: 4px solid white;
+    padding: 5px;
+}
+
+input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 42.5px;
+    line-height: 30px;
+    outline: 0;
+    border: 0;
+    display: none;
+    font-size: 1em;
+    border-radius: 20px;
+    padding: 0 20px;
+}
+
+/*----------SEARCH PAGE SEARCH FORM STYLE---------------*/
+.nav-item.searchpage-container form {
+    /* Adjust width as needed for your design */
+    width: 800px; /* width of the search bar  */
+    background: white;
+    box-sizing: border-box;
+    border-radius: 25px;
+    border: 2.5px solid #8c52ff; 
+    display: flex; /* Use flex layout to align children inline */
+    align-items: center; /* Centers items vertically in the flex container */
+
+
+}
+
+.nav-item.searchpage-container button.fa {
+    padding: 10px;
+    width: 42.5px; /* width and lenght for purple part*/
+    height: 48.5px; 
+    background: #8c52ff; 
+    border-radius: 0 20px 25px 0; /* Rounded corners on the right side */
+    color: #1c1c1c;
+    text-align: center;
+    font-size: 1.2em;
+    border: none;
+    cursor: pointer;
+    
+}
+
+.nav-item {
+    list-style-type: none; /* This removes the bullet point */
+
+}
+
+/*STYLING FOR ANIME DISPLAYING*/
+.anime-body {
+    margin: 0;
+    padding: 0;
+    background-color: #1c1c1c;
+}
+
+.display-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 20px;
+}
+
+.anime-container {
+    width: 60%;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-right: 20px;
+    margin-left: auto; /* Center the container horizontally */
+    margin-right: auto;
+}
+
+.anime-container h1 {
+    font-size: 28px;
+    color: #333;
+    margin-bottom: 10px;
+    text-align: center; /* Center text */
+}
+
+.anime-container img {
+    max-width: 100%;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto; /* Center the image horizontally */
+}
+
+
+
+.anime-container hr {
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin: 20px 0;
+}
+
+.anime-container h3 {
+    font-size: 20px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.anime-container p {
+    font-size: 16px;
+    color: #666;
+    line-height: 1.6;
+}
+
+.anime-feature{
+    margin-bottom: 10px;
+}
+
+.watchlist-button {
+    background-color: #8c52ff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.watchlist-button:hover {
+    background-color: #7d3cfe;
+}
+
+.episodes-watched-input {
+    width: 10px;
+    padding: 8px;
+    font-size: 16px;
+    border: 4px solid black;
+    border-radius: 5px;
+}
+
+.update-episodes-button {
+    background-color: #8c52ff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.update-episodes-button:hover {
+    background-color: #7d3cfe;
+}
+
+.anime-sidebar {
+    width: 30%;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+.anime-sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.anime-sidebar li {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 10px;
+}
+
+/**anime watchlist page*/
+
+.watchlistBody{
+    background-color: #1c1c1c;
+}
+
+.watchlist-container {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr); /* Six columns with equal width */
+    gap: 20px; /* Gap between grid items */
+    padding: 20px; /* Add padding to the container */
+    margin-bottom: 10px;
+}
+
+figure {
+    margin: 0; /* Remove default margin */
+    padding: 10px; /* Add padding to each figure */
+    box-sizing: border-box; /* Include padding in the total width */
+}
+
+.anime-image {
+    width: 200px; /* Ensure images take up full width of their container */
+    height: 300px; /* Maintain aspect ratio */
+}
+
+.title{
+    color: white;
+}
