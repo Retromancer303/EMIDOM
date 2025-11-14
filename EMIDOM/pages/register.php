@@ -128,6 +128,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         <!--register box-->
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
             <h1>Sign Up</h1>
+
+            <?php 
+            if(!empty($password_err)){
+                echo '<div class="alert alert-danger">' . $password_err . '</div>';
+            }        
+            ?>
             
             <div class="input-box">
                 <input type="text" name ="username" placeholder="Username" required <?php echo (!empty($username_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $username; ?>">

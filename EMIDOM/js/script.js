@@ -7,14 +7,14 @@ const initSlider = async () => {
     const maxScrollLeft = imageList.scrollWidth - imageList.clientWidth;
 
     try {
-        const url = 'https://myanimelist.p.rapidapi.com/anime/top/%7Bcategory%7D';
+        const url = 'https://myanimelist.p.rapidapi.com/anime/top/all?p=1';
         const options = {
-            method: 'GET',
-            headers: {
-                'X-RapidAPI-Key': 'c574e600e0mshf9b43d5d6846017p1d76ffjsnbf4083bfc589',
-                'X-RapidAPI-Host': 'myanimelist.p.rapidapi.com'
-            }
-        };
+        method: 'GET',
+        headers: {
+            'x-rapidapi-key': 'd2aa070660msh67c1d1e950a983dp1ae9e3jsnd3ac570aca0b',
+            'x-rapidapi-host': 'myanimelist.p.rapidapi.com'
+        }
+    };
 
         const response = await fetch(url, options);
         const data = await response.json();
@@ -22,33 +22,30 @@ const initSlider = async () => {
         // Clear any existing content in the image list
         imageList.innerHTML = '';
 
-        // Iterate over the first 10 anime and create image list items
+        // Iterate over the first 12 anime and create image list items
         data.slice(0, 12).forEach((anime, index) => {
-            // Create and set content for the image
             const img = document.createElement('img');
-            img.src = anime.picture_url; // Assuming image URL is in the 'picture_url' property
-            img.alt = anime.title; // Set alt text to anime title
-            img.dataset.myanimeId = anime.myanimelist_id; // Set dataset attribute for MyAnimeList ID
+            img.src = anime.picture_url; // Image URL
+            img.alt = anime.title;       // Alt text
+            img.dataset.myanimeId = anime.myanimelist_id; // Dataset
+
             img.style.width = '200px';
             img.style.height = '300px';
             img.classList.add('image-item');
 
-            // Create anchor tag for each image
             const anchor = document.createElement('a');
-            anchor.href = `./pages/anime.php?id=${anime.myanimelist_id}`; // Adjust path and query parameter as needed
-            anchor.appendChild(img); // Append the image to the anchor
+            anchor.href = `./pages/anime.php?id=${anime.myanimelist_id}`;
+            anchor.appendChild(img);
 
-            // Add hover effect
             anchor.addEventListener('mouseenter', () => {
-                img.style.opacity = '0.7'; // Reduce opacity on hover
-                img.style.transition = 'opacity 0.3s ease'; // Smooth transition effect
+                img.style.opacity = '0.7';
+                img.style.transition = 'opacity 0.3s ease';
             });
 
             anchor.addEventListener('mouseleave', () => {
-                img.style.opacity = '1'; // Restore opacity on mouse leave
+                img.style.opacity = '1';
             });
 
-            // Append the anchor tag to the image list
             imageList.appendChild(anchor);
         });
 
@@ -115,8 +112,8 @@ const initSlider = async () => {
     });
 }
 
-window.addEventListener("resize", initSlider);
 window.addEventListener("load", initSlider);
+window.addEventListener("resize", initSlider);
 
 const mangaInitSlider = async () => {
     const imageList = document.querySelector(".manga-slider-wrapper .manga-image-list");
@@ -127,12 +124,12 @@ const mangaInitSlider = async () => {
     const maxScrollLeft = imageList.scrollWidth - imageList.clientWidth;
 
     try {
-        const url = 'https://myanimelist.p.rapidapi.com/manga/top/%7Bcategory%7D';
+        const url = 'https://myanimelist.p.rapidapi.com/manga/top/all?p=1';
         const options = {
             method: 'GET',
             headers: {
-                'X-RapidAPI-Key': 'c574e600e0mshf9b43d5d6846017p1d76ffjsnbf4083bfc589',
-                'X-RapidAPI-Host': 'myanimelist.p.rapidapi.com'
+                'x-rapidapi-key': 'd2aa070660msh67c1d1e950a983dp1ae9e3jsnd3ac570aca0b',
+                'x-rapidapi-host': 'myanimelist.p.rapidapi.com'
             }
         };
 
@@ -147,8 +144,8 @@ const mangaInitSlider = async () => {
             // Create and set content for the image
             const img = document.createElement('img');
             img.src = anime.picture_url; // Assuming image URL is in the 'picture_url' property
-            img.alt = anime.title; // Set alt text to anime title
-            img.dataset.myanimeId = anime.myanimelist_id; // Set dataset attribute for MyAnimeList ID
+            img.alt = anime.title_en; // Set alt text to anime title
+            img.dataset.myanimeId = anime.id; // Set dataset attribute for MyAnimeList ID
             img.style.width = '200px';
             img.style.height = '300px';
             img.classList.add('manga-image-item');
@@ -247,12 +244,12 @@ const tvNewInitSlider = async () => {
     const maxScrollLeft = imageList.scrollWidth - imageList.clientWidth;
 
     try {
-        const url = 'https://myanimelist.p.rapidapi.com/v2/anime/seasonal?year=2024';
+        const url = 'https://myanimelist.p.rapidapi.com/v2/anime/seasonal?year=2023&season=winter';
         const options = {
             method: 'GET',
             headers: {
-                'X-RapidAPI-Key': 'c574e600e0mshf9b43d5d6846017p1d76ffjsnbf4083bfc589',
-                'X-RapidAPI-Host': 'myanimelist.p.rapidapi.com'
+                'x-rapidapi-key': 'd2aa070660msh67c1d1e950a983dp1ae9e3jsnd3ac570aca0b',
+		        'x-rapidapi-host': 'myanimelist.p.rapidapi.com'
             }
         };
 
@@ -266,9 +263,9 @@ const tvNewInitSlider = async () => {
         data['TV (New)'].slice(0, 12).forEach((anime, index) => {
             // Create and set content for the image
             const img = document.createElement('img');
-            img.src = anime.image_url; // Use the image_url property for the image source
+            img.src = anime.picture_url; // Use the image_url property for the image source
             img.alt = anime.title; // Set alt text to anime title
-            img.dataset.myanimeId = anime.timyanimelist_idtle; // Set dataset attribute for anime title
+            img.dataset.myanimeId = anime.myanimelist_id; // Set dataset attribute for anime title
             img.style.width = '200px';
             img.style.height = '300px';
             img.classList.add('tvNew-image-item');
@@ -371,8 +368,8 @@ document.addEventListener('DOMContentLoaded', async function () {
         const options = {
             method: 'GET',
             headers: {
-                'X-RapidAPI-Key': 'c574e600e0mshf9b43d5d6846017p1d76ffjsnbf4083bfc589',
-                'X-RapidAPI-Host': 'myanimelist.p.rapidapi.com'
+                'x-rapidapi-key': 'd2aa070660msh67c1d1e950a983dp1ae9e3jsnd3ac570aca0b',
+                'x-rapidapi-host': 'myanimelist.p.rapidapi.com'
             }
         };
 
